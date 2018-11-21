@@ -25,13 +25,26 @@ after_success:
 #after_failure:
 
 # Monitor only these branches
-branches:
-  only:
-  - master
-  - dev
+#branches:
+#  only:
+#  - master
+#  - dev
 
 # You can delete the cache using travis-ci web interface
 cache:
   directories:
   - $HOME/.composer/cache
+  
+  
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: $ACCESSKEYID
+  secret_access_key:
+    secure: "$SECRETACCESSKEY"
+  region: "us-west-2"  
+  app: "myphp"
+  env: "Myphp-env"
+  bucket_name: "$S3BUCKET"
+  on:
+    branch: master
 
